@@ -127,7 +127,7 @@ public class AnagramsActivity extends AppCompatActivity {
         TextView resultView = (TextView) findViewById(R.id.resultView);
         if (currentWord == null) {
             currentWord = dictionary.pickGoodStarterWord();
-            anagrams = dictionary.getAnagramsWithOneMoreLetter(currentWord);
+            anagrams = dictionary.validAnswers(currentWord);
             String listString = "";
 
             for (String s : anagrams)

@@ -67,7 +67,7 @@ public class AnagramDictionary {
     }
 
     public boolean isGoodWord(String word, String base) {
-        return getAnagramsWithOneMoreLetter(base).contains(word);
+        return validAnswers(base).contains(word);
     }
 
     public List<String> getAnagrams(String targetWord) {
@@ -79,7 +79,18 @@ public class AnagramDictionary {
         return (List<String>) new ArrayList<String>(x);
     }
 
-    public List<String> getAnagramsWithOneMoreLetter(String word) {
+    public List<String> validAnswers(String word) {
+        List<String> x = getAnagramsWithOneMoreLetter(word);
+        List<String> result = new ArrayList<String>();
+
+        for (String i : x) {
+            if (!i.contains(word)) result.add(i);
+        }
+
+        return result;
+    }
+
+    private List<String> getAnagramsWithOneMoreLetter(String word) {
         ArrayList<String> result = new ArrayList<String>();
         for (char alphabet: ALPHABET.toCharArray()) {
             String key = sort(alphabet + word);
@@ -97,7 +108,7 @@ public class AnagramDictionary {
             String key = preComputeKeyList.get(randomIx);
             wordSet = anagramMap.get(key);
 
-            if (getAnagramsWithOneMoreLetter(key).size() > 5) {
+            if (validAnswers(key).size() > 5) {
                 break;
             }
         }
